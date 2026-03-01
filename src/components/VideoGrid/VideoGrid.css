@@ -1,3 +1,9 @@
+.video-grid-wrapper {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .video-modal {
   position: fixed;
   inset: 0;

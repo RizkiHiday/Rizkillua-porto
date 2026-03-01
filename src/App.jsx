@@ -395,14 +395,14 @@ function App() {
         {/* Photography & Design */}
 
         {/* Video Edit & Content */}
-        <div className="video-content mt-32 py-10" id="videos" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="video-content mt-32 py-10 w-full" id="videos" style={{ position: 'relative', zIndex: 1 }}>
           <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
             Video Edit & Content
           </h1>
           <p className="text-base/loose text-center opacity-50 mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">
             Bringing stories to life through creative video editing and engaging content
           </p>
-          <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true">
+          <div className="w-full" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true">
             <VideoGrid videos={videoData} radius={500} damping={0.45} fadeOut={0.6} ease="power3.out" />
           </div>
         </div>

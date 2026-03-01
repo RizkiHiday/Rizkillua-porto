@@ -1,14 +1,16 @@
 .chroma-grid {
   position: relative;
   width: 100%;
+  max-width: 1280px;
   min-height: 400px;
+  margin-left: auto;
+  margin-right: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 320px);
   grid-auto-rows: auto;
   justify-content: center;
+  justify-items: center;
   gap: 1.25rem;
-  max-width: 1280px;
-  margin: 0 auto;
   padding: 1rem;
   box-sizing: border-box;
 
