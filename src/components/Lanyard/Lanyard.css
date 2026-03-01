@@ -1,0 +1,19 @@
+.lanyard-wrapper {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  max-width: 540px;
+  height: 58vh;
+  min-height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .lanyard-wrapper {
+    height: 62vh;
+    max-height: 500px;
+  }
+}
