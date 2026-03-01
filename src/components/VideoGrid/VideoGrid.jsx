@@ -7,6 +7,11 @@ const VideoGrid = ({ videos, radius = 300, damping = 0.45, fadeOut = 0.6, ease =
   const [isLoading, setIsLoading] = useState(false);
 
   const handleVideoClick = (video) => {
+    if (!video.isLocal) {
+      const viewUrl = video.videoUrl.replace('/preview', '/view');
+      window.open(viewUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
     setSelectedVideo(video);
     setIsLoading(true);
   };
