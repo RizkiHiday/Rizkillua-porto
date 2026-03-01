@@ -7,11 +7,6 @@ const VideoGrid = ({ videos, radius = 300, damping = 0.45, fadeOut = 0.6, ease =
   const [isLoading, setIsLoading] = useState(false);
 
   const handleVideoClick = (video) => {
-    if (!video.isLocal) {
-      const viewUrl = video.videoUrl.replace('/preview', '/view');
-      window.open(viewUrl, '_blank', 'noopener,noreferrer');
-      return;
-    }
     setSelectedVideo(video);
     setIsLoading(true);
   };
@@ -70,15 +65,18 @@ const VideoGrid = ({ videos, radius = 300, damping = 0.45, fadeOut = 0.6, ease =
                 </video>
               ) : (
                 <iframe
-                  src={selectedVideo.videoUrl}
-                  allow="autoplay; fullscreen"
+                  src={selectedVideo.videoUrl.replace('/view', '/preview')}
+                  title={selectedVideo.title}
+                  allow="autoplay; fullscreen; encrypted-media"
                   allowFullScreen
                   onLoad={handleIframeLoad}
                   style={{ 
                     display: isLoading ? 'none' : 'block',
                     width: '100%',
                     height: '70vh',
-                    border: 'none'
+                    minHeight: '360px',
+                    border: 'none',
+                    borderRadius: '8px'
                   }}
                 ></iframe>
               )}

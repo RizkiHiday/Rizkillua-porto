@@ -8,7 +8,7 @@ import GlassIcons from "./components/GlassIcons/GlassIcons";
 import { listTools } from "./data";
 import Aurora from "./components/Aurora/Aurora";
 import DecayCard from "./components/DecayCard/DecayCard";
-import DomeGallery from "./components/DomeGallery/DomeGallery";
+import Masonry from "./components/Masonry/Masonry";
 import VideoGrid from "./components/VideoGrid/VideoGrid";
 import AOS from 'aos';
 
@@ -42,6 +42,13 @@ const posterImages = [
 ].map(name => ({ src: BASE + '/assets/Poster/' + encodeURIComponent(name), alt: name.replace(/\.[^.]+$/, '') }));
 
 const galleryImages = [...photographyImages, ...posterImages];
+
+const masonryItems = galleryImages.map((img, index) => ({
+  id: String(index + 1),
+  img: img.src,
+  url: img.src,
+  height: 260 + (index % 3) * 100, // variasi tinggi supaya grid hidup
+}));
 
 const videoData = [
   {
@@ -312,31 +319,83 @@ function App() {
         {/* tentang */}
 
         {/* Photography & Design */}
-        <div className="photography-design mt-32" id="gallery">
-          <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+        <div
+          className="photography-design mt-32 pt-12 pb-16"
+          id="gallery"
+          style={{
+            borderTop: '1px solid rgba(255,255,255,0.12)',
+            borderBottom: '1px solid rgba(255,255,255,0.12)',
+            marginBottom: '1px',
+          }}
+        >
+          <h1
+            className="text-center text-4xl font-bold mb-2"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-once="true"
+          >
             Photography & Design
           </h1>
-          <p className="text-base/loose text-center opacity-50 mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">
+          <p
+            className="text-base/loose text-center opacity-50 mb-10"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="300"
+            data-aos-once="true"
+          >
             Capturing moments and creating visual stories through my lens and design work
           </p>
-          <div style={{ width: '100vw', height: '80vh', minHeight: '500px', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }} data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true">
-            <DomeGallery
-              images={galleryImages}
-              fit={0.7}
-              minRadius={500}
-              maxVerticalRotationDeg={0}
-              segments={25}
-              dragDampening={2}
-              grayscale={false}
-              openedImageWidth="auto"
-              openedImageHeight="auto"
+          <div
+            style={{
+              width: '100vw',
+              minHeight: '400px',
+              marginLeft: 'calc(-50vw + 50%)',
+              marginRight: 'calc(-50vw + 50%)',
+              position: 'relative',
+              isolation: 'isolate',
+            }}
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="400"
+            data-aos-once="true"
+          >
+            <Masonry
+              items={masonryItems}
+              ease="power3.out"
+              duration={0.6}
+              stagger={0.05}
+              animateFrom="bottom"
+              scaleOnHover
+              hoverScale={0.95}
+              blurToFocus
+              colorShiftOnHover={false}
+              openInModal
             />
           </div>
+          <div
+            className="section-divider"
+            style={{
+              height: '1px',
+              marginTop: '32px',
+              marginBottom: '8px',
+              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)',
+              pointerEvents: 'none',
+            }}
+            aria-hidden="true"
+          />
+          <div
+            style={{
+              height: '24px',
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.2), transparent)',
+              pointerEvents: 'none',
+            }}
+            aria-hidden="true"
+          />
         </div>
         {/* Photography & Design */}
 
         {/* Video Edit & Content */}
-        <div className="video-content mt-32 py-10" id="videos">
+        <div className="video-content mt-32 py-10" id="videos" style={{ position: 'relative', zIndex: 1 }}>
           <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
             Video Edit & Content
           </h1>
