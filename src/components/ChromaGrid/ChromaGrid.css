@@ -20,14 +20,32 @@
 @media (max-width: 768px) {
   .chroma-grid {
     grid-template-columns: 1fr;
-    justify-items: center;
+    justify-items: stretch;
     gap: 1rem;
-    padding: 0.75rem;
+    padding: 0 0 0.5rem;
+    min-height: 300px;
   }
 
   .chroma-card {
     width: 100%;
-    max-width: 320px;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .chroma-img-wrapper {
+    min-height: 180px;
+  }
+
+  .chroma-info {
+    padding: 0.75rem 1rem;
+  }
+
+  .chroma-info .name {
+    font-size: 1rem;
+  }
+
+  .chroma-info .role {
+    font-size: 0.875rem;
   }
 }
 
