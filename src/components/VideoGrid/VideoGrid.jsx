@@ -7,6 +7,12 @@ const VideoGrid = ({ videos, radius = 300, damping = 0.45, fadeOut = 0.6, ease =
   const [isLoading, setIsLoading] = useState(false);
 
   const handleVideoClick = (video) => {
+    // Google Drive memblokir embed iframe di situs lain (CSP). Buka di tab baru agar bisa diputar.
+    if (!video.isLocal) {
+      const viewUrl = video.videoUrl.replace(/\/preview\/?$/, '/view');
+      window.open(viewUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
     setSelectedVideo(video);
     setIsLoading(true);
   };
@@ -17,10 +23,6 @@ const VideoGrid = ({ videos, radius = 300, damping = 0.45, fadeOut = 0.6, ease =
   };
 
   const handleVideoLoaded = () => {
-    setIsLoading(false);
-  };
-
-  const handleIframeLoad = () => {
     setIsLoading(false);
   };
 
@@ -50,36 +52,17 @@ const VideoGrid = ({ videos, radius = 300, damping = 0.45, fadeOut = 0.6, ease =
                   <p>Loading video...</p>
                 </div>
               )}
-              
-              {selectedVideo.isLocal ? (
-                <video 
-                  controls 
-                  autoPlay 
-                  preload="metadata"
-                  onLoadedData={handleVideoLoaded}
-                  onCanPlay={handleVideoLoaded}
-                  style={{ display: isLoading ? 'none' : 'block' }}
-                >
-                  <source src={selectedVideo.videoUrl} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <iframe
-                  src={selectedVideo.videoUrl.replace('/view', '/preview')}
-                  title={selectedVideo.title}
-                  allow="autoplay; fullscreen; encrypted-media"
-                  allowFullScreen
-                  onLoad={handleIframeLoad}
-                  style={{ 
-                    display: isLoading ? 'none' : 'block',
-                    width: '100%',
-                    height: '70vh',
-                    minHeight: '360px',
-                    border: 'none',
-                    borderRadius: '8px'
-                  }}
-                ></iframe>
-              )}
+              <video
+                controls
+                autoPlay
+                preload="metadata"
+                onLoadedData={handleVideoLoaded}
+                onCanPlay={handleVideoLoaded}
+                style={{ display: isLoading ? 'none' : 'block' }}
+              >
+                <source src={selectedVideo.videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
             <div className="video-modal-info">
               <h3>{selectedVideo.title}</h3>

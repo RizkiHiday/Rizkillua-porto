@@ -89,11 +89,11 @@ const videoData = [
   },
   {
     image: BASE + '/video/cover/' + encodeURIComponent('cover 2.png'),
-    title: 'UKM Campoer Seni - Divisi Tari',
-    subtitle: 'Dance Performance',
+    title: 'After Movie MDS 2025',
+    subtitle: 'Event Documentation',
     borderColor: '#8B5CF6',
     gradient: 'linear-gradient(135deg, #8B5CF6, #000)',
-    videoUrl: 'https://drive.google.com/file/d/YOUR_VIDEO_ID/preview',
+    videoUrl: 'https://drive.google.com/file/d/1T4O4YFjvB4RNPhNjyEcfY6MEMG2J55OD/view?usp=drive_link',
     isLocal: false
   },
   {
