@@ -1,13 +1,13 @@
 .chroma-grid {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 400px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
+  grid-template-columns: repeat(auto-fill, 320px);
   grid-auto-rows: auto;
   justify-content: center;
-  gap: 1rem;
-  max-width: 1200px;
+  gap: 1.25rem;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 1rem;
   box-sizing: border-box;
@@ -17,33 +17,17 @@
   --r: 220px;
 }
 
-@media (min-width: 1024px) and (max-width: 1280px) {
+@media (max-width: 768px) {
   .chroma-grid {
-    position: relative;
-    width: 100%;
-    height: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
-    grid-auto-rows: auto;
-    justify-content: center;
+    grid-template-columns: 1fr;
+    justify-items: center;
     gap: 1rem;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 1rem;
-    box-sizing: border-box;
+    padding: 0.75rem;
+  }
 
-    --x: 50%;
-    --y: 50%;
-    --r: 220px;
-    }
-}
-
-
-@media (max-width: 1024px) {
-  .chroma-grid {
-    grid-template-columns: 320px;
-    gap: 0.75rem;
-    padding: 1rem;
+  .chroma-card {
+    width: 100%;
+    max-width: 320px;
   }
 }
 
@@ -110,7 +94,7 @@
   color: #fff;
   font-family: system-ui, sans-serif;
   display: grid;
-  row-gap: rem;
+  row-gap: 0.25rem;
   column-gap: 0.75rem;
 }
 

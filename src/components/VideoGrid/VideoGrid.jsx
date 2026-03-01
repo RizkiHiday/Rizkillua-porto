@@ -28,7 +28,7 @@ const VideoGrid = ({ videos, radius = 300, damping = 0.45, fadeOut = 0.6, ease =
 
   return (
     <>
-      <div style={{ height: 'auto', position: 'relative', minHeight: '600px' }}>
+      <div style={{ width: '100%', minHeight: '500px', position: 'relative' }}>
         <ChromaGrid
           items={videos}
           onItemClick={handleVideoClick}
