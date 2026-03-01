@@ -218,15 +218,15 @@ function App() {
           <div className="md:ml-auto animate__animated animate__fadeInUp animate__delay-4s">
             <ProfileCard
               name="Rizki Hidayat"
-              title="Video Editor"
-              handle="ulatngesot"
+              title="Videographer & Photographer"
+              handle="ulat.ngesot"
               status="Online"
               contactText="Contact Me"
               avatarUrl="./assets/rizki.png"
               showUserInfo={true}
               enableTilt={true}
               enableMobileTilt={false}
-              onContactClick={() => console.log('Contact clicked')}
+              onContactClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             />
           </div>
         </div>
@@ -280,7 +280,7 @@ function App() {
                 height={450}
                 image={decayCardImage}
               >
-                <h2 className="text-white">Rizki<br />Video Editor</h2>
+                <h2 className="text-white">Rizki<br />Videographer & Photographer</h2>
               </DecayCard>
             </div>
           </div>
@@ -402,8 +402,17 @@ function App() {
           <p className="text-base/loose text-center opacity-50 mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">
             Bringing stories to life through creative video editing and engaging content
           </p>
-          <div className="w-full" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true">
-            <VideoGrid videos={videoData} radius={500} damping={0.45} fadeOut={0.6} ease="power3.out" />
+          <div
+            className="w-full"
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="400"
+            data-aos-once="true"
+          >
+            <div style={{ width: '100%', maxWidth: '1280px' }}>
+              <VideoGrid videos={videoData} radius={500} damping={0.45} fadeOut={0.6} ease="power3.out" />
+            </div>
           </div>
         </div>
         {/* Video Edit & Content */}
