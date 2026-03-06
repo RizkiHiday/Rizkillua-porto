@@ -1,5 +1,5 @@
 import "remixicon/fonts/remixicon.css";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Dock from "./Dock/Dock";
 import { VscHome, VscArchive, VscAccount } from "react-icons/vsc";
 
@@ -7,31 +7,17 @@ const Footer = () => {
   const [visitors, setVisitors] = useState(null);
   const [visitorError, setVisitorError] = useState(false);
 
-  const counterUrl = useMemo(() => {
-    const workspace = "rizki-portofolio";
-    const counterName = "visits";
-
-    const isLocalhost =
-      typeof window !== "undefined" &&
-      (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
-
-    // Local dev: jangan increment, hanya baca.
-    const action = isLocalhost ? "" : "/up";
-    return `https://api.counterapi.dev/v2/${workspace}/${counterName}${action}`;
-  }, []);
-
   useEffect(() => {
     let cancelled = false;
 
-    const token = import.meta.env.VITE_COUNTERAPI_TOKEN;
+    // Pakai CountAPI V1 publik yang boleh diakses dari browser (tanpa header Authorization).
+    // Namespace + key bisa diganti kalau mau reset counter.
+    const url = "https://api.countapi.xyz/hit/rizki-portfolio/visits";
 
-    fetch(counterUrl, {
-      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-    })
+    fetch(url)
       .then(r => r.json())
       .then(data => {
-        // CounterAPI V2: hasil umumnya { data: { value: number } }
-        const value = Number(data?.data?.value ?? data?.value);
+        const value = Number(data?.value);
         if (cancelled) return;
         if (Number.isFinite(value)) setVisitors(value);
         else setVisitorError(true);
@@ -44,7 +30,7 @@ const Footer = () => {
     return () => {
       cancelled = true;
     };
-  }, [counterUrl]);
+  }, []);
 
   const items = [
     { icon: <VscHome size={18} />, label: "Home", onClick: () => document.getElementById("home")?.scrollIntoView({ behavior: "smooth" }) },
