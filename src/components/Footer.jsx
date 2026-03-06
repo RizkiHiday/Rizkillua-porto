@@ -8,27 +8,30 @@ const Footer = () => {
   const [visitorError, setVisitorError] = useState(false);
 
   const counterUrl = useMemo(() => {
-    // Static site: pakai layanan counter publik (tanpa backend).
-    // Namespace + key harus stabil supaya hit tersimpan konsisten.
-    const namespace = "rizki-portofolio";
-    const key = "visits";
+    const workspace = "rizki-portofolio";
+    const counterName = "visits";
 
     const isLocalhost =
       typeof window !== "undefined" &&
       (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
 
     // Local dev: jangan increment, hanya baca.
-    const endpoint = isLocalhost ? "get" : "hit";
-    return `https://api.countapi.xyz/${endpoint}/${namespace}/${key}`;
+    const action = isLocalhost ? "" : "/up";
+    return `https://api.counterapi.dev/v2/${workspace}/${counterName}${action}`;
   }, []);
 
   useEffect(() => {
     let cancelled = false;
 
-    fetch(counterUrl)
+    const token = import.meta.env.VITE_COUNTERAPI_TOKEN;
+
+    fetch(counterUrl, {
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    })
       .then(r => r.json())
       .then(data => {
-        const value = Number(data?.value);
+        // CounterAPI V2: hasil umumnya { data: { value: number } }
+        const value = Number(data?.data?.value ?? data?.value);
         if (cancelled) return;
         if (Number.isFinite(value)) setVisitors(value);
         else setVisitorError(true);
